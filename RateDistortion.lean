@@ -6,6 +6,8 @@ import Mathlib.Probability.ProbabilityMassFunction.Integrals
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.Convex.Jensen
 import Mathlib.InformationTheory.KullbackLeibler.Basic
+import Mathlib.Topology.Order.Compact
+import Mathlib.Topology.Instances.ENNReal.Lemmas
 
 
 set_option linter.style.multiGoal false
@@ -5229,7 +5231,7 @@ def asymptoticDistortion
       (seq.code n) P d)
     atTop
 
--- The asymptotic rate used in the standard operational definition.
+-- The limsup rate used in the asymptotic-rate notion of achievability.
 def asymptoticRate
     (seq : CodeSequence X Y) : ENNReal :=
   Filter.limsup
@@ -5438,13 +5440,20 @@ theorem exists_codeSequence_testChannel_asymptoticBound
 
 
 
-/--
-A pair (R, D) is achievable if there exists a sequence of codes such that
-the rate is ≤ R and the expected distortion is ≤ D asymptotically.
--/
+/-- Achievability with an asymptotic rate constraint: both the rate and
+the expected distortion are bounded through their limsups. The manuscript's
+pointwise rate requirement is recorded separately in `isAchievablePointwise`. -/
 def isAchievable (P : PMF X) (d : Distortion (X := X) (Y := Y)) (R : ℝ) (D : ENNReal) : Prop :=
   ∃ seq : CodeSequence X Y,
     asymptoticRate seq ≤ ENNReal.ofReal R ∧ achievesDistortion seq P d D
+
+/-- Achievability with the rate requirement of Definition 5.2 in the manuscript:
+every code has rate at most R, and the limsup of expected distortion is at most D.
+Rates are measured using natural logarithms throughout this development. -/
+def isAchievablePointwise
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (R : ℝ) (D : ENNReal) : Prop :=
+  ∃ seq : CodeSequence X Y,
+    hasPointwiseRateBound seq R ∧ achievesDistortion seq P d D
 
 /-- A test channel whose distortion and mutual information satisfy the strict
 direct-theorem hypotheses yields one code sequence achieving its distortion
@@ -5486,6 +5495,153 @@ def rateDistortionRightContinuousAt
     (fun ε : ENNReal ↦ RateDistortionFunction P d (D + ε))
     (nhdsWithin (0 : ENNReal) (Set.Ioi 0))
     (𝓝 (RateDistortionFunction P d D))
+
+/-! Compactness and continuity for finite-alphabet rate-distortion optimization. -/
+
+/-- The topology of pointwise convergence on probability mass functions. -/
+instance PMF.instTopologicalSpace {A : Type*} : TopologicalSpace (PMF A) :=
+  inferInstanceAs (TopologicalSpace {f : A → ENNReal // HasSum f 1})
+
+theorem PMF.continuous_apply {A : Type*} (a : A) :
+    Continuous (fun p : PMF A => p a) :=
+  (_root_.continuous_apply a).comp continuous_subtype_val
+
+/-- On a finite alphabet, normalization defines a closed subset of a compact product. -/
+instance PMF.instCompactSpace {A : Type*} [Fintype A] : CompactSpace (PMF A) := by
+  have heq : {f : A → ENNReal | HasSum f 1} = {f | ∑ a, f a = 1} := by
+    ext f
+    exact ⟨fun h => (hasSum_fintype f).unique h, fun h => h ▸ hasSum_fintype f⟩
+  have hc : IsClosed {f : A → ENNReal | HasSum f 1} := by
+    rw [heq]
+    exact isClosed_eq (continuous_finset_sum _ (fun a _ => _root_.continuous_apply a)) continuous_const
+  exact isCompact_iff_compactSpace.mp hc.isCompact
+
+theorem PMF.continuous_toReal_apply {A : Type*} (a : A) :
+    Continuous (fun p : PMF A => (p a).toReal) := by
+  apply continuous_iff_continuousAt.mpr
+  intro p
+  exact ContinuousAt.comp (f := fun q : PMF A => q a)
+    (ENNReal.continuousAt_toReal (p.apply_ne_top a))
+    (PMF.continuous_apply a).continuousAt
+
+theorem PMF.continuous_map_finite (f : X → Y) :
+    Continuous (fun p : PMF X => p.map f) := by
+  apply Continuous.subtype_mk
+  apply continuous_pi
+  intro y
+  change Continuous (fun p : PMF X => p.map f y)
+  simp only [PMF.map_apply, tsum_fintype]
+  apply continuous_finset_sum
+  intro x _
+  by_cases h : y = f x
+  · simpa [h] using PMF.continuous_apply x
+  · simpa [h] using (continuous_const : Continuous (fun _ : PMF X => (0 : ENNReal)))
+
+theorem continuous_shannonEntropy : Continuous (shannonEntropy (X := X)) := by
+  unfold shannonEntropy
+  apply continuous_finset_sum
+  intro x _
+  exact Real.continuous_negMulLog.comp (PMF.continuous_toReal_apply x)
+
+theorem continuous_mutualInformationEntropy :
+    Continuous (mutualInformationEntropy (X := X) (Y := Y)) := by
+  exact ((continuous_shannonEntropy.comp (PMF.continuous_map_finite Prod.fst)).add
+    (continuous_shannonEntropy.comp (PMF.continuous_map_finite Prod.snd))).sub
+      continuous_shannonEntropy
+
+theorem continuous_mutual_information :
+    Continuous (mutual_information (X := X) (Y := Y)) := by
+  change Continuous (fun Q : PMF (X × Y) => mutual_information Q)
+  simp_rw [mutual_information_eq_ofReal_entropy]
+  exact ENNReal.continuous_ofReal.comp continuous_mutualInformationEntropy
+
+theorem continuous_induced_joint (P : PMF X) :
+    Continuous (induced_joint (Y := Y) P) := by
+  apply Continuous.subtype_mk
+  apply continuous_pi
+  intro z
+  change Continuous (fun W : X → PMF Y => induced_joint P W (z.1, z.2))
+  simp_rw [induced_joint_apply]
+  exact (ENNReal.continuous_const_mul (P.apply_ne_top z.1)).comp
+    ((PMF.continuous_apply z.2).comp (continuous_apply z.1))
+
+theorem continuous_expected_distortion_single
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) :
+    Continuous (fun W : X → PMF Y => expected_distortion_single P W d) := by
+  unfold expected_distortion_single
+  apply continuous_finset_sum
+  intro x _
+  apply (ENNReal.continuous_const_mul (P.apply_ne_top x)).comp
+  apply continuous_finset_sum
+  intro y _
+  exact (ENNReal.continuous_mul_const ENNReal.coe_ne_top).comp
+    ((PMF.continuous_apply y).comp (continuous_apply x))
+
+/-- A feasible finite-alphabet rate-distortion problem has an optimal test channel. -/
+theorem RateDistortionFunction_attained
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (hD : feasibleDistortion P d D) :
+    ∃ W : X → PMF Y, expected_distortion_single P W d ≤ D ∧
+      mutual_information (induced_joint P W) = RateDistortionFunction P d D := by
+  have hc : IsCompact {W : X → PMF Y | expected_distortion_single P W d ≤ D} :=
+    (isClosed_le (continuous_expected_distortion_single P d) continuous_const).isCompact
+  obtain ⟨W, hW, hmin⟩ := hc.exists_isMinOn hD
+    (continuous_mutual_information.comp (continuous_induced_joint P)).continuousOn
+  refine ⟨W, hW, le_antisymm ?_ (RateDistortionFunction_le P d D W hW)⟩
+  apply le_sInf
+  rintro r ⟨V, hV, rfl⟩
+  exact hmin hV
+
+/-- Compactness keeps sublevel sets closed, including at the least feasible
+distortion. Empty feasible sets are represented by the value infinity. -/
+theorem lowerSemicontinuous_RateDistortionFunction
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) :
+    LowerSemicontinuous (RateDistortionFunction P d) := by
+  apply lowerSemicontinuous_iff_isClosed_preimage.mpr
+  intro r
+  by_cases hr : r = ⊤
+  · subst r
+    simp
+  have heq : (RateDistortionFunction P d) ⁻¹' Set.Iic r =
+      Prod.fst '' {z : ENNReal × (X → PMF Y) |
+        expected_distortion_single P z.2 d ≤ z.1 ∧
+          mutual_information (induced_joint P z.2) ≤ r} := by
+    ext D
+    constructor
+    · intro hD
+      obtain ⟨V, hV, _⟩ := exists_testChannel_of_RateDistortionFunction_lt P d D ⊤
+        (lt_of_le_of_lt hD (lt_top_iff_ne_top.mpr hr))
+      obtain ⟨W, hW, hI⟩ := RateDistortionFunction_attained P d D ⟨V, hV⟩
+      exact ⟨(D, W), ⟨hW, hI.le.trans hD⟩, rfl⟩
+    · rintro ⟨⟨D', W⟩, ⟨hW, hI⟩, rfl⟩
+      exact (RateDistortionFunction_le P d D' W hW).trans hI
+  rw [heq]
+  apply IsCompact.isClosed
+  apply IsCompact.image _ continuous_fst
+  apply IsClosed.isCompact
+  exact (isClosed_le ((continuous_expected_distortion_single P d).comp continuous_snd)
+    continuous_fst).inter
+    (isClosed_le ((continuous_mutual_information.comp
+      (continuous_induced_joint P)).comp continuous_snd) continuous_const)
+
+/-- Right continuity holds at every extended nonnegative distortion threshold. -/
+theorem rateDistortionRightContinuousAt_all
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal) :
+    rateDistortionRightContinuousAt P d D := by
+  apply tendsto_order.mpr
+  constructor
+  · intro a ha
+    have hevent : ∀ᶠ t in 𝓝 D, a < RateDistortionFunction P d t :=
+      lowerSemicontinuous_RateDistortionFunction P d D a ha
+    have hadd : Tendsto (fun ε : ENNReal => D + ε)
+        (nhdsWithin (0 : ENNReal) (Set.Ioi 0)) (𝓝 D) := by
+      simpa using ((continuous_const.add continuous_id).continuousAt
+        (x := (0 : ENNReal))).tendsto.mono_left nhdsWithin_le_nhds
+    exact hadd.eventually hevent
+  · intro b hb
+    exact Filter.Eventually.of_forall fun ε =>
+      (RateDistortionFunction_antitone P d (le_add_right le_rfl)).trans_lt hb
+
 
 theorem rateDistortionRightContinuousAt_of_interior
     (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
@@ -5614,6 +5770,25 @@ theorem asymptoticRate_le_of_hasPointwiseRateBound
       (a := ENNReal.ofReal R) (by isBoundedDefault)
       (Filter.Eventually.of_forall fun n ↦ ENNReal.ofReal_mono (hR n)))
 
+/-- A pointwise rate bound implies the asymptotic rate bound for the same codes. -/
+theorem isAchievablePointwise_imp_isAchievable
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (R : ℝ) (D : ENNReal)
+    (hA : isAchievablePointwise P d R D) :
+    isAchievable P d R D := by
+  obtain ⟨seq, hrate, hdist⟩ := hA
+  exact ⟨seq, asymptoticRate_le_of_hasPointwiseRateBound seq R hrate, hdist⟩
+
+/-- At infinite distortion a constant-reconstruction sequence satisfies
+the pointwise rate requirement at every nonnegative rate. -/
+theorem isAchievablePointwise_top_of_nonneg_rate
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (R : ℝ)
+    [Nonempty Y] (hR : 0 ≤ R) :
+    isAchievablePointwise P d R ⊤ := by
+  let seq := constantExponentialCodeSequence (X := X) (Y := Y) R hR
+  exact ⟨seq,
+    constantExponentialCodeSequence_hasPointwiseRateBound (X := X) (Y := Y) R hR,
+    le_top⟩
+
 /-- At infinite distortion every nonnegative rate is operationally
 achievable, since no distortion constraint remains. -/
 theorem isAchievable_top_of_nonneg_rate
@@ -5644,47 +5819,314 @@ theorem rate_distortion_converse_of_rightContinuousAt
   filter_upwards [self_mem_nhdsWithin] with ε hε
   exact rate_distortion_converse_add P d D ε R hε hA
 
--- Rate distortion theorem
-theorem rate_distortion_achievability
+/-- Strict slack above RI(D) supplies codes satisfying the manuscript's
+pointwise rate requirement. Feasibility follows from the strict inequality. -/
+theorem isAchievablePointwise_of_rateDistortionFunction_lt
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal) (R : ℝ)
+    (hR : RateDistortionFunction P d D < ENNReal.ofReal R) :
+    isAchievablePointwise P d R D := by
+  obtain ⟨W, hW, hI⟩ :=
+    exists_testChannel_of_RateDistortionFunction_lt_ofReal P d D R hR
+  by_cases hDtop : D = ⊤
+  · subst D
+    letI : Nonempty Y := nonempty_reproduction_of_source_channel P W
+    exact isAchievablePointwise_top_of_nonneg_rate P d R
+      ((mutualInformationEntropy_nonneg (induced_joint P W)).trans_lt hI).le
+  · exact exists_codeSequence_testChannel_achieves P W d D R hDtop hW hI
+
+/-- The existing strict-rate asymptotic interface follows from the stronger
+pointwise conclusion. Its feasibility argument is retained for compatibility. -/
+theorem rate_distortion_achievability_strict
     (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
     (R : ℝ)
     (hD : feasibleDistortion P d D)
     (hR : RateDistortionFunction P d D < ENNReal.ofReal R) :
     isAchievable P d R D := by
-  by_cases hDtop : D = ⊤
-  · subst D
-    obtain ⟨W, _⟩ := hD
-    letI : Nonempty Y := nonempty_reproduction_of_source_channel P W
-    apply isAchievable_top_of_nonneg_rate P d R
-    by_contra hRnonneg
-    have hRnonpos : R ≤ 0 := le_of_not_ge hRnonneg
-    rw [ENNReal.ofReal_of_nonpos hRnonpos] at hR
-    exact (not_lt_of_ge bot_le) hR
-  · obtain ⟨W, hW, hI⟩ :=
-      exists_testChannel_of_RateDistortionFunction_lt_ofReal P d D R hR
-    obtain ⟨seq, hrate, hdist⟩ :=
-      exists_codeSequence_testChannel_achieves P W d D R hDtop hW hI
-    exact ⟨seq, asymptoticRate_le_of_hasPointwiseRateBound seq R hrate, hdist⟩
+  clear hD
+  exact isAchievablePointwise_imp_isAchievable P d R D
+    (isAchievablePointwise_of_rateDistortionFunction_lt P d D R hR)
 
--- Converse on the interior distortion region treated by the PDF.
+-- Equality-rate achievability and local continuity interfaces.
+
+theorem ennreal_diagonalSlack_small :
+    ∀ ε : ENNReal, 0 < ε → ∃ K : ℕ,
+      ∀ k : ℕ, K ≤ k → ENNReal.ofReal (diagonalSlack k) ≤ ε := by
+  intro ε hε
+  obtain ⟨K, _, hK⟩ := ENNReal.exists_nat_pos_inv_mul_lt
+    (show (1 : ENNReal) ≠ ⊤ by simp) hε.ne'
+  refine ⟨K, fun k hk => ?_⟩
+  rw [ennreal_ofReal_diagonalSlack]
+  have hcast : (K : ENNReal) ≤ ((k + 1 : ℕ) : ENNReal) := by
+    exact_mod_cast (Nat.le_succ_of_le hk)
+  exact (ENNReal.inv_le_inv' hcast).trans (by simpa using hK.le)
+
+/-- A vanishing positive rate slack is sufficient for the limsup rate bound. -/
+theorem asymptoticRate_le_of_diagonal_slack
+    (seq : CodeSequence X Y) (R : ℝ) (hR : 0 ≤ R) (N : ℕ → ℕ)
+    (hbound : ∀ n, codeRate (n + 1) (seq.M n) (Nat.succ_pos n) ≤
+      R + diagonalSlack (activePrecisionLevel N n)) :
+    asymptoticRate seq ≤ ENNReal.ofReal R := by
+  unfold asymptoticRate
+  apply (limsup_le_iff' (by isBoundedDefault) (by isBoundedDefault)).mpr
+  intro a ha
+  obtain ⟨K, hK⟩ := ennreal_diagonalSlack_small (a - ENNReal.ofReal R)
+    (tsub_pos_iff_lt.mpr ha)
+  filter_upwards [eventually_le_activePrecisionLevel N K] with n hn
+  calc
+    ENNReal.ofReal (codeRate (n + 1) (seq.M n) (Nat.succ_pos n)) ≤
+        ENNReal.ofReal (R + diagonalSlack (activePrecisionLevel N n)) :=
+      ENNReal.ofReal_le_ofReal (hbound n)
+    _ = ENNReal.ofReal R + ENNReal.ofReal (diagonalSlack (activePrecisionLevel N n)) :=
+      ENNReal.ofReal_add hR (diagonalSlack_pos _).le
+    _ ≤ ENNReal.ofReal R + (a - ENNReal.ofReal R) :=
+      by simpa [add_comm] using add_le_add_left (hK _ hn) (ENNReal.ofReal R)
+    _ = a := by rw [add_comm, tsub_add_cancel_of_le ha.le]
+
+/-- Closed-rate achievability for finite distortion. The codebook rate may
+exceed R at each finite blocklength, but its limsup is at most R. -/
+theorem rate_distortion_achievability_of_finite_distortion
+    (P : PMF X) (d : Distortion (X := X) (Y := Y))
+    (D : ENNReal) (R : ℝ) (hDtop : D ≠ ⊤) (hR : 0 ≤ R)
+    (hRD : RateDistortionFunction P d D ≤ ENNReal.ofReal R) :
+    isAchievable P d R D := by
+  classical
+  have hstrict (k : ℕ) : RateDistortionFunction P d D <
+      ENNReal.ofReal (R + diagonalSlack k) :=
+    hRD.trans_lt ((ENNReal.ofReal_lt_ofReal_iff_of_nonneg hR).mpr
+      (lt_add_of_pos_right R (diagonalSlack_pos k)))
+  choose W hW hI using fun k =>
+    exists_testChannel_of_RateDistortionFunction_lt_ofReal P d D
+      (R + diagonalSlack k) (hstrict k)
+  letI : Nonempty Y := nonempty_reproduction_of_source_channel P (W 0)
+  choose N hN using fun k => exists_nat_forall_exists_testChannelCode_bound
+    P (W k) d D (R + diagonalSlack k) hDtop (hW k) (hI k)
+    (diagonalSlack k) (diagonalSlack k) (diagonalSlack_pos k)
+    (diagonalSlack_pos k) (diagonalSlack_le_one k)
+  let rate := fun n => R + diagonalSlack (activePrecisionLevel N n)
+  have hrate (n : ℕ) : 0 ≤ rate n := add_nonneg hR (diagonalSlack_pos _).le
+  let seq : CodeSequence X Y :=
+    { M := fun n => exponentialCodebookSize (n + 1) (rate n)
+      hM := fun n => exponentialCodebookSize_pos (n + 1) (rate n) (hrate n)
+      code := fun n => if h : N (activePrecisionLevel N n) ≤ n + 1 then
+        (hN (activePrecisionLevel N n) (n + 1) h).choose_spec.choose else
+        constantRateDistortionCode (n + 1)
+          (exponentialCodebookSize (n + 1) (rate n))
+          (exponentialCodebookSize_pos (n + 1) (rate n) (hrate n)) }
+  refine ⟨seq, ?_, ?_⟩
+  · apply asymptoticRate_le_of_diagonal_slack seq R hR N
+    intro n
+    exact codeRate_exponentialCodebookSize_le (n := n + 1)
+      (Nat.succ_pos n) (rate n) (hrate n)
+  · apply asymptoticDistortion_le_of_diagonal_error seq P d D N
+      (diagonalDistortionError d) ?_ (diagonalDistortionError_small d)
+    have hthreshold : ∀ᶠ n in atTop, N (activePrecisionLevel N n) ≤ n + 1 := by
+      filter_upwards [eventually_le_activePrecisionLevel N 1] with n hn
+      rcases activePrecisionLevel_eq_zero_or_threshold_le N n with hz | ht
+      · omega
+      · exact ht
+    filter_upwards [hthreshold] with n hn
+    change expectedDistortion (n + 1) (exponentialCodebookSize (n + 1) (rate n))
+      (Nat.succ_pos n)
+      (if h : N (activePrecisionLevel N n) ≤ n + 1 then
+        (hN (activePrecisionLevel N n) (n + 1) h).choose_spec.choose else
+        constantRateDistortionCode (n + 1)
+          (exponentialCodebookSize (n + 1) (rate n))
+          (exponentialCodebookSize_pos (n + 1) (rate n) (hrate n))) P d ≤ _
+    simpa only [dif_pos hn, diagonalDistortionError, add_assoc] using
+      (hN (activePrecisionLevel N n) (n + 1) hn).choose_spec.choose_spec.2
+
+/-- The asymptotic converse also applies to manuscript achievability, using
+the implication from a pointwise rate bound to a limsup rate bound. -/
+theorem rate_distortion_converse_pointwise_of_rightContinuousAt
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (R : ℝ) (hcont : rateDistortionRightContinuousAt P d D)
+    (hA : isAchievablePointwise P d R D) :
+    RateDistortionFunction P d D ≤ ENNReal.ofReal R := by
+  exact rate_distortion_converse_of_rightContinuousAt P d D R hcont
+    (isAchievablePointwise_imp_isAchievable P d R D hA)
+
+/-!
+===============================================================================
+             MAIN THEOREMS WITH THE MANUSCRIPT RATE REQUIREMENT
+===============================================================================
+Both statements use isAchievablePointwise: every code has rate at most R.
+1. Direct theorem: R_I(D) < R implies achievability.
+2. Converse: achievability implies R_I(D) <= R at every distortion level.
+   Right continuity follows from compactness and continuity of the finite-
+   alphabet optimization problem; it is not an additional hypothesis.
+The equality-rate result for the asymptotic rate requirement is retained below.
+===============================================================================
+-/
+
+-- ==================== DIRECT THEOREM ====================
+/-- Strict-rate achievability with the pointwise rate requirement of the manuscript. -/
+theorem rate_distortion_achievability
+    (P : PMF X) (d : Distortion (X := X) (Y := Y))
+    (D : ENNReal) (R : ℝ)
+    (hRD : RateDistortionFunction P d D < ENNReal.ofReal R) :
+    isAchievablePointwise P d R D := by
+  exact isAchievablePointwise_of_rateDistortionFunction_lt P d D R hRD
+
+-- ==================== CONVERSE ====================
+/-- The manuscript rate requirement implies the lower rate bound at every
+distortion level. Right continuity is supplied by the finite-alphabet theory. -/
 theorem rate_distortion_converse
     (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
     (R : ℝ)
-    (hDint : interiorDistortion P d D)
-    (hA : isAchievable P d R D) :
+    (hA : isAchievablePointwise P d R D) :
     RateDistortionFunction P d D ≤ ENNReal.ofReal R := by
-  exact rate_distortion_converse_of_rightContinuousAt P d D R
-    (rateDistortionRightContinuousAt_of_interior P d D hDint) hA
+  exact rate_distortion_converse_pointwise_of_rightContinuousAt P d D R
+    (rateDistortionRightContinuousAt_all P d D) hA
 
--- The strict converse form follows from `rate_distortion_converse`.
+/-- Rates below RI(D) are not achievable with the manuscript rate requirement. -/
 theorem rate_distortion_nonachievability
     (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
     (R : ℝ)
-    (hDint : interiorDistortion P d D)
+    (hR : ENNReal.ofReal R < RateDistortionFunction P d D) :
+    ¬ isAchievablePointwise P d R D := by
+  intro hA
+  exact (not_le_of_gt hR) (rate_distortion_converse P d D R hA)
+
+-- ===========================================================================
+--                     END OF MANUSCRIPT MAIN THEOREMS
+-- ===========================================================================
+
+/-!
+===============================================================================
+                 THEOREMS WITH AN ASYMPTOTIC RATE REQUIREMENT
+===============================================================================
+These statements use isAchievable, which bounds the limsup of the code rates.
+The direct theorem includes R = R_I(D). It does not claim a pointwise rate
+bound at equality. The converse holds at every distortion level.
+===============================================================================
+-/
+
+/-- No distortion threshold is needed: a finite upper bound on RI(D)
+already supplies a feasible test channel and a nonempty reproduction alphabet. -/
+theorem rate_distortion_achievability_asymptotic
+    (P : PMF X) (d : Distortion (X := X) (Y := Y))
+    (D : ENNReal) (R : ℝ) (hR : 0 ≤ R)
+    (hRD : RateDistortionFunction P d D ≤ ENNReal.ofReal R) :
+    isAchievable P d R D := by
+  by_cases hDtop : D = ⊤
+  · subst D
+    have hstrict : RateDistortionFunction P d ⊤ < ENNReal.ofReal (R + 1) :=
+      hRD.trans_lt ((ENNReal.ofReal_lt_ofReal_iff_of_nonneg hR).mpr (by linarith))
+    obtain ⟨W, _, _⟩ := exists_testChannel_of_RateDistortionFunction_lt_ofReal
+      P d ⊤ (R + 1) hstrict
+    letI : Nonempty Y := nonempty_reproduction_of_source_channel P W
+    exact isAchievable_top_of_nonneg_rate P d R hR
+  · exact rate_distortion_achievability_of_finite_distortion P d D R hDtop hR hRD
+
+-- ==================== CONVERSE ====================
+-- Scope: every distortion threshold D : ENNReal.
+theorem rate_distortion_converse_asymptotic
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (R : ℝ)
+    (hA : isAchievable P d R D) :
+    RateDistortionFunction P d D ≤ ENNReal.ofReal R := by
+  exact rate_distortion_converse_of_rightContinuousAt P d D R
+    (rateDistortionRightContinuousAt_all P d D) hA
+
+-- The strict converse form follows from `rate_distortion_converse_asymptotic`.
+theorem rate_distortion_nonachievability_asymptotic
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (R : ℝ)
     (hR : ENNReal.ofReal R < RateDistortionFunction P d D) :
     ¬ isAchievable P d R D := by
   intro hA
-  exact (not_le_of_gt hR) (rate_distortion_converse P d D R hDint hA)
+  exact (not_le_of_gt hR) (rate_distortion_converse_asymptotic P d D R hA)
 
+-- ===========================================================================
+--                 END OF ASYMPTOTIC RATE THEOREMS
+-- ===========================================================================
+
+/-- The equality-rate boundary, expressed through RI(D) alone. -/
+theorem rate_distortion_achievability_at_boundary
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (hfinite : RateDistortionFunction P d D ≠ ⊤) :
+    isAchievable P d (RateDistortionFunction P d D).toReal D := by
+  apply rate_distortion_achievability_asymptotic P d D _ ENNReal.toReal_nonneg
+  rw [ENNReal.ofReal_toReal hfinite]
+
+/-- A modular equivalence interface with an explicit right-continuity argument. -/
+theorem rate_distortion_achievable_iff_of_rightContinuousAt
+    (P : PMF X) (d : Distortion (X := X) (Y := Y))
+    (D : ENNReal) (R : ℝ) (hR : 0 ≤ R)
+    (hcont : rateDistortionRightContinuousAt P d D) :
+    isAchievable P d R D ↔ RateDistortionFunction P d D ≤ ENNReal.ofReal R := by
+  exact ⟨rate_distortion_converse_of_rightContinuousAt P d D R hcont,
+    rate_distortion_achievability_asymptotic P d D R hR⟩
+
+/-- The full characterization under an asymptotic rate constraint, with no
+additional continuity or interior-distortion hypothesis. -/
+theorem rate_distortion_achievable_iff
+    (P : PMF X) (d : Distortion (X := X) (Y := Y))
+    (D : ENNReal) (R : ℝ) (hR : 0 ≤ R) :
+    isAchievable P d R D ↔ RateDistortionFunction P d D ≤ ENNReal.ofReal R := by
+  exact rate_distortion_achievable_iff_of_rightContinuousAt P d D R hR
+    (rateDistortionRightContinuousAt_all P d D)
+
+/-- A strictly feasible channel suffices for right continuity. Unlike the
+older interior interface, this does not refer to either distortion threshold. -/
+theorem rateDistortionRightContinuousAt_of_strictly_feasible
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (hDtop : D ≠ ⊤) (W₀ : X → PMF Y)
+    (hW₀ : expected_distortion_single P W₀ d < D) :
+    rateDistortionRightContinuousAt P d D := by
+  let D₀ := expected_distortion_single P W₀ d
+  have hD₀ : D₀ < D := hW₀
+  have hD₀feas : feasibleDistortion P d D₀ := ⟨W₀, le_rfl⟩
+  have hDfeas : feasibleDistortion P d D := ⟨W₀, hW₀.le⟩
+  have hRDtop : RateDistortionFunction P d D ≠ ⊤ :=
+    RateDistortionFunction_ne_top_of_feasible P d D W₀ hW₀.le
+  have hRD₀top : RateDistortionFunction P d D₀ ≠ ⊤ :=
+    RateDistortionFunction_ne_top_of_feasible P d D₀ W₀ le_rfl
+  have hc0 : D - D₀ ≠ 0 := (tsub_pos_iff_lt.mpr hD₀).ne'
+  have hctop : D - D₀ ≠ ⊤ := ne_top_of_le_ne_top hDtop tsub_le_self
+  have hlower := ennreal_tsub_barycentric_tendsto
+    (RateDistortionFunction P d D) (RateDistortionFunction P d D₀)
+    (D - D₀) hRDtop hRD₀top hc0 hctop
+  have hupper : Tendsto (fun _ : ENNReal ↦ RateDistortionFunction P d D)
+      (nhdsWithin (0 : ENNReal) (Set.Ioi 0))
+      (𝓝 (RateDistortionFunction P d D)) := tendsto_const_nhds
+  apply tendsto_of_tendsto_of_tendsto_of_le_of_le' hlower hupper
+  · filter_upwards [self_mem_nhdsWithin,
+      Filter.Eventually.filter_mono nhdsWithin_le_nhds
+        (Iio_mem_nhds (show (0 : ENNReal) < 1 by norm_num))] with ε hε hεsmall
+    have hεtop : ε ≠ ⊤ := ne_top_of_lt hεsmall
+    obtain ⟨hab, hbar, hb⟩ := ennreal_barycentric_weights D₀ D ε hD₀ hDtop hεtop
+    have hDplus : feasibleDistortion P d (D + ε) :=
+      feasibleDistortion_mono P d (le_add_right le_rfl) hDfeas
+    have htsub := RateDistortionFunction_tsub_le_of_convex
+      P d (ε / (D - D₀ + ε)) ((D - D₀) / (D - D₀ + ε)) hab
+      D₀ (D + ε) hD₀feas hDplus hb
+    rw [hbar] at htsub
+    exact htsub
+  · filter_upwards [] with ε
+    exact RateDistortionFunction_antitone P d (le_add_right le_rfl)
+
+/-- Once RI(D) is zero, monotonicity proves right continuity at D directly. -/
+theorem rateDistortionRightContinuousAt_of_eq_zero
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (hzero : RateDistortionFunction P d D = 0) :
+    rateDistortionRightContinuousAt P d D := by
+  have heq (ε : ENNReal) : RateDistortionFunction P d (D + ε) = 0 := by
+    apply le_antisymm _ bot_le
+    calc
+      RateDistortionFunction P d (D + ε) ≤ RateDistortionFunction P d D :=
+        RateDistortionFunction_antitone P d (le_add_right le_rfl)
+      _ = 0 := hzero
+  unfold rateDistortionRightContinuousAt
+  simp_rw [heq, hzero]
+  exact tendsto_const_nhds
+
+/-- Zero rate is included in the equality-rate result. -/
+theorem rate_distortion_zero_rate_achievable
+    (P : PMF X) (d : Distortion (X := X) (Y := Y)) (D : ENNReal)
+    (hzero : RateDistortionFunction P d D = 0) :
+    isAchievable P d 0 D := by
+  apply rate_distortion_achievability_asymptotic P d D 0 le_rfl
+  simp [hzero]
 
 end RateDistortion
