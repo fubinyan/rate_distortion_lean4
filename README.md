@@ -94,9 +94,3 @@ For a mathematical reading, begin with `Distortion`, `RateDistortionFunction`, `
 The present formalization covers finite alphabets, finite nonnegative single-letter distortion, and deterministic operational codes. Countable or continuous alphabets, infinite letterwise distortion, and stochastic operational encoders or decoders are outside this development. Equality-rate achievability with a pointwise rate bound is not asserted.
 
 Further infrastructure work includes splitting the main module, providing downstream examples, and assessing which general lemmas fit Mathlib's existing interfaces.
-
-## Contributions and citation
-
-Issues and improvements can be discussed in the [issue tracker](https://github.com/fubinyan/rate_distortion_lean4/issues). Changes to definitions or main theorem hypotheses should explain their mathematical effect and update the documentation.
-
-When referring to the development, include the repository URL and the commit used. A paper citation and a versioned archive can be added when publication metadata is available.
