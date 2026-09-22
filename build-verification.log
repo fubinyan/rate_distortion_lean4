@@ -1,0 +1,1796 @@
+✔ [1058/3161] Built Mathlib.Lean.GoalsLocation (6.2s)
+✔ [1908/3161] Built Mathlib.Algebra.Ring.CompTypeclasses (13s)
+✔ [2185/3161] Built Mathlib.Dynamics.FixedPoints.Basic (12s)
+✔ [2724/3161] Built Mathlib.Algebra.MonoidAlgebra.Degree (16s)
+✔ [2870/3161] Built Mathlib.RingTheory.MvPolynomial.Tower (14s)
+✔ [2872/3161] Built Mathlib.RingTheory.PowerBasis (17s)
+✔ [2924/3161] Built Mathlib.Analysis.Normed.Operator.LinearIsometry (44s)
+✔ [3120/3161] Built Mathlib.MeasureTheory.Integral.Bochner.L1 (25s)
+⚠ [3156/3161] Built ApiCheck (34s)
+info: ApiCheck.lean:8:0: tsum_eq_sum.{u_1, u_2} {α : Type u_1} {β : Type u_2} [AddCommMonoid α] [TopologicalSpace α] {f : β → α}
+  {L : SummationFilter β} [L.LeAtTop] {s : Finset β} (hf : ∀ b ∉ s, f b = 0) : ∑'[L] (b : β), f b = ∑ b ∈ s, f b
+warning: ApiCheck.lean:17:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ApiCheck.lean:16:0: automatically included section variable(s) unused in theorem `sum_pmf'`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: ApiCheck.lean:16:0: `sum_pmf'` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: ApiCheck.lean:17:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+⚠ [3158/3161] Built RateDistortion (34s)
+info: RateDistortion.lean:39:0: Distortion.{u_1, u_2} {X : Type u_1} {Y : Type u_2} : Type (max u_1 u_2)
+warning: RateDistortion.lean:45:0: automatically included section variable(s) unused in theorem `distortion_le_bound`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:45:0: `distortion_le_bound` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:56:0: `distortion_bounded` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:56:0: `distortion_bounded` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:124:0: automatically included section variable(s) unused in theorem `nonempty_of_pmf`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:123:0: `nonempty_of_pmf` has the hypothesis:
+  • [Fintype X] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:123:0: `nonempty_of_pmf` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:130:0: automatically included section variable(s) unused in theorem `nonempty_reproduction_of_source_channel`:
+  [Fintype X]
+  [Fintype Y]
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:128:0: `nonempty_reproduction_of_source_channel` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:128:0: `nonempty_reproduction_of_source_channel` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:136:0: automatically included section variable(s) unused in theorem `codebookEncoder_good_of_exists`:
+  [Fintype X]
+  [Fintype Y]
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:136:0: `codebookEncoder_good_of_exists` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:136:0: `codebookEncoder_good_of_exists` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:145:8: automatically included section variable(s) unused in theorem `codebookCode_decoder`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:145:0: `codebookCode_decoder` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:152:21: unused variable `hn`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: RateDistortion.lean:157:0: `blockDistortion_le_bound` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:171:14: unused variable `hn`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: RateDistortion.lean:295:0: automatically included section variable(s) unused in theorem `sum_pmf`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:295:0: `sum_pmf` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:301:0: `sum_pmf_toReal` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:332:0: `pmf_deviation_probability_le_variance_div_sq` has the hypothesis:
+  • [DecidableEq A] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:383:0: automatically included section variable(s) unused in theorem `shannonEntropy_nonneg`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:383:0: `shannonEntropy_nonneg` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:403:8: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: RateDistortion.lean:391:0: `shannonEntropy_le_log_card` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:459:0: `map_apply_toReal` has the hypothesis:
+  • [Fintype B] (#4)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:472:0: `map_apply_equiv` has the hypotheses:
+  • [Fintype A] (#3)
+  • [Fintype B] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:559:0: `withDensity_pmfDensityRatio` has the hypothesis:
+  • [Fintype A] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:571:0: `rnDeriv_pmf_eq_densityRatio` has the hypothesis:
+  • [Fintype A] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:579:0: `llr_pmf_ae_eq_log_densityRatio` has the hypothesis:
+  • [Fintype A] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:681:0: automatically included section variable(s) unused in theorem `sum_mul_log_eq_neg_shannonEntropy`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:681:0: `sum_mul_log_eq_neg_shannonEntropy` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:717:0: automatically included section variable(s) unused in theorem `kl_divergence_eq_ofReal_sum`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:717:0: `kl_divergence_eq_ofReal_sum` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:764:3: error: doc-strings should start with a single space or newline
+
+Note: This linter can be disabled with `set_option linter.style.docString false`
+warning: RateDistortion.lean:772:0: `induced_joint_apply` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:772:0: `induced_joint_apply` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:793:2: 'simp' is a flexible tactic modifying '⊢'. Try 'simp?' and use the suggested 'simp only [...]'. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RateDistortion.lean:793:2: Try this:
+  [apply] simp only [sum_ite_irrel, sum_const_zero, sum_ite_eq, mem_univ, ↓reduceIte]
+info: RateDistortion.lean:794:2: 'rw [← Finset.mul_sum, sum_pmf, mul_one]' uses '⊢'!
+warning: RateDistortion.lean:786:0: `induced_joint_fst` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:786:0: `induced_joint_fst` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:796:0: `induced_joint_snd_apply` has the hypothesis:
+  • [Fintype Y] (#4)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:796:0: `induced_joint_snd_apply` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:803:0: `induced_joint_snd` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:803:0: `induced_joint_snd` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:809:0: `bind_apply_toReal` has the hypothesis:
+  • [Fintype B] (#4)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:809:0: `bind_apply_toReal` has the hypotheses:
+  • [DecidableEq A] (#5)
+  • [DecidableEq B] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:819:0: `sum_weighted_entropy_le_entropy_bind` has the hypotheses:
+  • [DecidableEq A] (#5)
+  • [DecidableEq B] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:850:0: `shannonEntropy_induced_joint` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:888:0: `shannonEntropy_product_pmf` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:895:0: `induced_joint_map_snd` has the hypotheses:
+  • [Fintype A] (#4)
+  • [Fintype B] (#5)
+  • [Fintype C] (#6)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:907:0: automatically included section variable(s) unused in theorem `fstMarginal_apply`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:907:0: `fstMarginal_apply` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:907:0: `fstMarginal_apply` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:922:0: automatically included section variable(s) unused in theorem `sndMarginal_apply`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:931:13: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  simp only ̵[̵P̵r̵o̵d̵.̵s̵n̵d̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: RateDistortion.lean:922:0: `sndMarginal_apply` has the hypothesis:
+  • [Fintype Y] (#4)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:922:0: `sndMarginal_apply` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1002:0: `conditionalEntropy_nonneg` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1014:0: `conditionalEntropy_le_snd_entropy` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1020:0: `shannonEntropy_joint_le_add_marginals` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1027:0: `mutualInformationEntropy_nonneg` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1033:0: `shannonEntropy_induced_joint_strong_subadditivity` has the hypotheses:
+  • [DecidableEq A] (#7)
+  • [DecidableEq B] (#8)
+  • [DecidableEq C] (#9)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1065:0: `shannonEntropy_strong_subadditivity` has the hypotheses:
+  • [DecidableEq A] (#7)
+  • [DecidableEq B] (#8)
+  • [DecidableEq C] (#9)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1095:0: `conditionalEntropy_more_conditioning_le` has the hypotheses:
+  • [DecidableEq A] (#7)
+  • [DecidableEq B] (#8)
+  • [DecidableEq C] (#9)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1127:0: `conditionalEntropy_pair_le_add` has the hypotheses:
+  • [DecidableEq A] (#9)
+  • [DecidableEq B] (#10)
+  • [DecidableEq C] (#11)
+  • [DecidableEq D] (#12)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1212:0: `conditionalEntropy_pi_le_sum` has the hypotheses:
+  • [DecidableEq A] (#5)
+  • [DecidableEq C] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1316:0: `shannonEntropy_strong_subadditivity_common_snd` has the hypotheses:
+  • [DecidableEq A] (#7)
+  • [DecidableEq B] (#8)
+  • [DecidableEq C] (#9)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1374:0: `mutualInformationEntropy_bind_le_average_of_fst_eq` has the hypotheses:
+  • [DecidableEq A] (#7)
+  • [DecidableEq B] (#8)
+  • [DecidableEq C] (#9)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1414:0: automatically included section variable(s) unused in theorem `mutualInformationEntropy_le_fst`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1414:0: `mutualInformationEntropy_le_fst` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1420:0: automatically included section variable(s) unused in theorem `mutualInformationEntropy_le_snd`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1420:0: `mutualInformationEntropy_le_snd` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1426:0: `product_pmf_apply` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1426:0: `product_pmf_apply` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1481:0: `pmfRealExpectation_sub_self` has the hypothesis:
+  • [DecidableEq A] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1534:0: `pmfRealVariance_product_pmf_add` has the hypotheses:
+  • [DecidableEq A] (#5)
+  • [DecidableEq B] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1638:0: `support_joint_subset_product_marginals` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1638:0: `support_joint_subset_product_marginals` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1654:0: `weighted_log_pmfDensityRatio_product_marginals` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1654:0: `weighted_log_pmfDensityRatio_product_marginals` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1688:0: `sum_weighted_log_densityRatio_product_marginals` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1730:0: `mutual_information_eq_ofReal_entropy` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1737:0: `joint_absolutelyContinuous_product_marginals` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1737:0: `joint_absolutelyContinuous_product_marginals` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1753:0: automatically included section variable(s) unused in theorem `pmfRealExpectation_pairDistortion_eq_toReal_jointExpectedDistortion`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1751:0: `pmfRealExpectation_pairDistortion_eq_toReal_jointExpectedDistortion` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1772:0: `jointExpectedDistortion_induced` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1783:0: `pmfRealExpectation_inducedJoint_distortion` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1791:3: error: doc-strings should start with a single space or newline
+
+Note: This linter can be disabled with `set_option linter.style.docString false`
+warning: RateDistortion.lean:1801:0: automatically included section variable(s) unused in theorem `RateDistortionFunction_le`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1801:0: `RateDistortionFunction_le` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1808:0: automatically included section variable(s) unused in theorem `exists_testChannel_of_RateDistortionFunction_lt`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1808:0: `exists_testChannel_of_RateDistortionFunction_lt` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1820:0: `exists_testChannel_of_RateDistortionFunction_lt_ofReal` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1836:0: `RateDistortionFunction_le_of_joint` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1849:0: automatically included section variable(s) unused in theorem `RateDistortionFunction_antitone`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1849:0: `RateDistortionFunction_antitone` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1863:0: automatically included section variable(s) unused in theorem `feasibleDistortion_mono`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1863:0: `feasibleDistortion_mono` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1909:8: automatically included section variable(s) unused in theorem `channelMix_apply`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1909:0: `channelMix_apply` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1909:0: `channelMix_apply` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1914:0: automatically included section variable(s) unused in theorem `expected_distortion_single_channelMix`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1914:0: `expected_distortion_single_channelMix` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:1961:8: automatically included section variable(s) unused in theorem `bind_channelMix`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:1961:0: `bind_channelMix` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:1961:0: `bind_channelMix` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2001:0: `mutualInformationEntropy_channelMix_le` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2024:0: `mutual_information_channelMix_le` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2024:0: `mutual_information_channelMix_le` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2059:0: `RateDistortionFunction_le_channelMix` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2075:0: `RateDistortionFunction_ne_top_of_feasible` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2086:0: `RateDistortionFunction_convex_of_feasible` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2163:0: `RateDistortionFunction_tsub_le_of_convex` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2251:0: `mutual_information_induced_joint_const` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2251:0: `mutual_information_induced_joint_const` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2266:0: automatically included section variable(s) unused in theorem `minimumDistortion_le_of_feasibleDistortion`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2266:0: `minimumDistortion_le_of_feasibleDistortion` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2276:0: automatically included section variable(s) unused in theorem `feasibleDistortion_of_minimumDistortion_lt`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2276:0: `feasibleDistortion_of_minimumDistortion_lt` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2284:0: `interiorDistortion_feasible` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2290:0: `RateDistortionFunction_ne_top_of_interior` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2297:0: `RateDistortionFunction_eq_zero_of_zeroRateDistortion_lt` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2384:22: unused variable `hn`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: RateDistortion.lean:2387:8: automatically included section variable(s) unused in theorem `blockRealSum_zero`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2387:0: `blockRealSum_zero` has the hypothesis:
+  • [Fintype X] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2387:0: `blockRealSum_zero` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2392:0: automatically included section variable(s) unused in theorem `blockRealSum_succ`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2392:0: `blockRealSum_succ` has the hypothesis:
+  • [Fintype X] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2392:0: `blockRealSum_succ` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2408:8: automatically included section variable(s) unused in theorem `memorylessChannelBlockPMF_apply`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2408:0: `memorylessChannelBlockPMF_apply` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2408:0: `memorylessChannelBlockPMF_apply` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2425:0: automatically included section variable(s) unused in theorem `blockDistortion_toReal_eq_blockRealAverage`:
+  [Fintype X]
+  [Fintype Y]
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:2423:0: `blockDistortion_toReal_eq_blockRealAverage` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:2423:0: `blockDistortion_toReal_eq_blockRealAverage` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2609:0: `weighted_pmf_le_badMass_add_error` has the hypothesis:
+  • [DecidableEq B] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2676:8: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: RateDistortion.lean:2652:0: `blockDistortion_codebookCode_le_threshold_add_bound_mul_miss` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2686:0: `exists_le_pmf_weighted_sum` has the hypothesis:
+  • [DecidableEq A] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:2913:0: `weighted_pmf_add_half_lowMass_le_one` has the hypothesis:
+  • [DecidableEq B] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:3077:8: automatically included section variable(s) unused in theorem `memorylessCodebookPMF_codeword`:
+  [Fintype X]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype X] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:3077:0: `memorylessCodebookPMF_codeword` has the hypothesis:
+  • [Fintype X] (#3)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:3077:0: `memorylessCodebookPMF_codeword` has the hypothesis:
+  • [DecidableEq X] (#5)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:3316:0: `pmfRealExpectation_singleLetterInformationDensity` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:3599:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RateDistortion.lean:3612:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RateDistortion.lean:3638:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RateDistortion.lean:3671:30: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: RateDistortion.lean:3685:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RateDistortion.lean:3983:28: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: RateDistortion.lean:4401:0: `sum_coordinate_mutualInformationEntropy_le_block` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4497:0: automatically included section variable(s) unused in theorem `codeReproductionPMF_eq_map_codeIndex`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4497:0: `codeReproductionPMF_eq_map_codeIndex` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4504:0: `shannonEntropy_codeReproduction_le_codeIndex` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4511:0: automatically included section variable(s) unused in theorem `shannonEntropy_codeIndex_le_log`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4511:0: `shannonEntropy_codeIndex_le_log` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4516:0: `shannonEntropy_codeReproduction_le_log` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4548:8: automatically included section variable(s) unused in theorem `codeJointPMF_fst`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4548:0: `codeJointPMF_fst` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4554:8: automatically included section variable(s) unused in theorem `codeJointPMF_snd`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4554:0: `codeJointPMF_snd` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4561:0: automatically included section variable(s) unused in theorem `shannonEntropy_codeJointPMF`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4561:0: `shannonEntropy_codeJointPMF` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4569:0: `mutualInformationEntropy_codeJointPMF` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4577:0: `mutualInformationEntropy_codeJointPMF_le_log` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4583:0: `mutual_information_codeJointPMF_le_log` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4596:0: `codeCoordinateJointPMF_fst` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4613:0: `averageCoordinateJointPMF_fst` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4620:0: `mutualInformationEntropy_averageCoordinate_le_average` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4644:0: `sum_codeCoordinate_mutualInformationEntropy_le_block` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4652:0: `mutualInformationEntropy_averageCoordinate_le_log_div` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4668:0: `mutual_information_averageCoordinate_le_codeRate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4676:0: automatically included section variable(s) unused in theorem `jointExpectedDistortion_codeCoordinate`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4676:0: `jointExpectedDistortion_codeCoordinate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4686:0: automatically included section variable(s) unused in theorem `jointExpectedDistortion_averageCoordinate`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:4686:0: `jointExpectedDistortion_averageCoordinate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4729:0: `expectedDistortion_eq_averageCoordinate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4764:0: `RateDistortionFunction_le_codeCoordinateInformation` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4775:0: `RateDistortionFunction_expectedDistortion_le_codeRate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4784:0: `expectedDistortion_le_bound` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4847:0: `exists_codebookCode_expectedDistortion_le_threshold_add_bound_mul_error` has the hypothesis:
+  • [(x : Xblock n X) → DecidablePred (goodBlockPair n hn P W d distortionThreshold (↑n * threshold) x)] (#18)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:4915:0: `exists_nat_forall_exists_exponentialCode_rate_and_expectedDistortion` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5002:0: automatically included section variable(s) unused in theorem `constantExponentialCodeSequence_hasPointwiseRateBound`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5002:0: `constantExponentialCodeSequence_hasPointwiseRateBound` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5067:0: automatically included section variable(s) unused in theorem `diagonalDistortionError_small`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5067:0: `diagonalDistortionError_small` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5098:0: automatically included section variable(s) unused in theorem `exists_diagonalCodeSequence_of_eventually_codes`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5095:0: `exists_diagonalCodeSequence_of_eventually_codes` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5148:0: automatically included section variable(s) unused in theorem `exists_codeSequence_of_eventually_exponentialCode`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5146:0: `exists_codeSequence_of_eventually_exponentialCode` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5186:0: `exists_codeSequence_fixed_slack_bound` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5253:0: automatically included section variable(s) unused in theorem `asymptoticDistortion_le_of_diagonal_error`:
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5251:0: `asymptoticDistortion_le_of_diagonal_error` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5284:0: `exists_codeSequence_fixed_slack_asymptoticBound` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5339:0: `exists_nat_forall_exists_testChannelCode_bound` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5400:0: `exists_codeSequence_testChannel_asymptoticBound` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5458:0: `exists_codeSequence_testChannel_achieves` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5509:0: `instCompactSpace` has the hypothesis:
+  • [Fintype A] (#2)
+which is not used in the remainder of the type.
+
+Consider replacing this hypothesis with the corresponding instance of `Finite` and using `Fintype.ofFinite` in the proof, or removing it entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:5516:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RateDistortion.lean:5527:0: automatically included section variable(s) unused in theorem `PMF.continuous_map_finite`:
+  [Fintype Y]
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype Y] [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5527:0: `continuous_map_finite` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:5527:0: `continuous_map_finite` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5540:0: automatically included section variable(s) unused in theorem `continuous_shannonEntropy`:
+  [DecidableEq X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5540:0: `continuous_shannonEntropy` has the hypothesis:
+  • [DecidableEq X] (#3)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5546:0: `continuous_mutualInformationEntropy` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5552:0: `continuous_mutual_information` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:5552:0: `continuous_mutual_information` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5558:0: `continuous_induced_joint` has the hypotheses:
+  • [Fintype X] (#3)
+  • [Fintype Y] (#4)
+which are not used in the remainder of the type.
+
+Consider replacing these hypotheses with the corresponding instances of `Finite` and using `Fintype.ofFinite` in the proof, or removing them entirely.
+
+Note: This linter can be disabled with `set_option linter.unusedFintypeInType false`
+warning: RateDistortion.lean:5558:0: `continuous_induced_joint` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5568:0: automatically included section variable(s) unused in theorem `continuous_expected_distortion_single`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5568:0: `continuous_expected_distortion_single` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5580:0: `RateDistortionFunction_attained` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5595:0: `lowerSemicontinuous_RateDistortionFunction` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5627:0: `rateDistortionRightContinuousAt_all` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5646:0: `rateDistortionRightContinuousAt_of_interior` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5705:0: `rate_distortion_sequence_converse_add` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5745:0: `rate_distortion_sequence_converse_of_eventually_le` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5762:0: automatically included section variable(s) unused in theorem `asymptoticRate_le_of_hasPointwiseRateBound`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5762:0: `asymptoticRate_le_of_hasPointwiseRateBound` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5773:0: `isAchievablePointwise_imp_isAchievable` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5781:0: `isAchievablePointwise_top_of_nonneg_rate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5792:0: `isAchievable_top_of_nonneg_rate` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5805:0: `rate_distortion_converse_add` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5812:0: `rate_distortion_converse_of_rightContinuousAt` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5822:0: `isAchievablePointwise_of_rateDistortionFunction_lt` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5842:5: unused variable `hD`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: RateDistortion.lean:5837:0: `rate_distortion_achievability_strict` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5864:0: automatically included section variable(s) unused in theorem `asymptoticRate_le_of_diagonal_slack`:
+  [DecidableEq X]
+  [DecidableEq Y]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq X] [DecidableEq Y] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RateDistortion.lean:5863:0: `asymptoticRate_le_of_diagonal_slack` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5885:0: `rate_distortion_achievability_of_finite_distortion` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5938:0: `rate_distortion_converse_pointwise_of_rightContinuousAt` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5962:0: `rate_distortion_achievability` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5971:0: `rate_distortion_converse` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:5981:0: `rate_distortion_nonachievability` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6004:0: `rate_distortion_achievability_asymptotic` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6023:0: `rate_distortion_converse_asymptotic` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6032:0: `rate_distortion_nonachievability_asymptotic` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6044:0: `rate_distortion_achievability_at_boundary` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6052:0: `rate_distortion_achievable_iff_of_rightContinuousAt` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6061:0: `rate_distortion_achievable_iff` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6070:0: `rateDistortionRightContinuousAt_of_strictly_feasible` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6109:0: `rateDistortionRightContinuousAt_of_eq_zero` has the hypotheses:
+  • [DecidableEq X] (#5)
+  • [DecidableEq Y] (#6)
+which are not used in the remainder of the type.
+
+Consider removing these hypotheses and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+warning: RateDistortion.lean:6124:0: `rate_distortion_zero_rate_achievable` has the hypothesis:
+  • [DecidableEq Y] (#6)
+which is not used in the remainder of the type.
+
+Consider removing this hypothesis and using `classical` in the proof instead. For terms, consider using `open scoped Classical in` at the term level (not the command level).
+
+Note: This linter can be disabled with `set_option linter.unusedDecidableInType false`
+ℹ [3160/3161] Built MainResults (27s)
+info: MainResults.lean:5:0: rate_distortion_achievability.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y] [DecidableEq X]
+  [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal) (R : ℝ)
+  (hRD : RateDistortionFunction P d D < ENNReal.ofReal R) : isAchievablePointwise P d R D
+info: MainResults.lean:6:0: rate_distortion_converse.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y] [DecidableEq X]
+  [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal) (R : ℝ) (hA : isAchievablePointwise P d R D) :
+  RateDistortionFunction P d D ≤ ENNReal.ofReal R
+info: MainResults.lean:7:0: rate_distortion_achievability_at_boundary.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y]
+  [DecidableEq X] [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal)
+  (hfinite : RateDistortionFunction P d D ≠ ⊤) : isAchievable P d (RateDistortionFunction P d D).toReal D
+info: MainResults.lean:8:0: rate_distortion_achievable_iff.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y] [DecidableEq X]
+  [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal) (R : ℝ) (hR : 0 ≤ R) :
+  isAchievable P d R D ↔ RateDistortionFunction P d D ≤ ENNReal.ofReal R
+info: MainResults.lean:9:0: RateDistortionFunction_attained.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y] [DecidableEq X]
+  [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal) (hD : feasibleDistortion P d D) :
+  ∃ W, expected_distortion_single P W d ≤ D ∧ mutual_information (induced_joint P W) = RateDistortionFunction P d D
+info: MainResults.lean:10:0: rateDistortionRightContinuousAt_all.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [Fintype X] [Fintype Y] [DecidableEq X]
+  [DecidableEq Y] (P : PMF X) (d : Distortion) (D : ENNReal) : rateDistortionRightContinuousAt P d D
+info: MainResults.lean:12:0: 'rate_distortion_achievability' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: MainResults.lean:13:0: 'rate_distortion_converse' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: MainResults.lean:14:0: 'rate_distortion_achievability_at_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: MainResults.lean:15:0: 'rate_distortion_achievable_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: MainResults.lean:16:0: 'rateDistortionRightContinuousAt_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (3161 jobs).

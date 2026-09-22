@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rate-Distortion Lean Dependency Graph</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5d6873;
+      --line: #c8d0d7;
+      --paper: #ffffff;
+      --panel: #f5f7f9;
+      --proof: #315b7d;
+      --statement: #818b94;
+      --both: #76538c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    header {
+      min-height: 82px;
+      padding: 16px 24px 12px;
+      border-bottom: 1px solid #d5dce2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    h1 {
+      margin: 0 0 5px;
+      font-family: "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button, input {
+      min-height: 34px;
+      border: 1px solid #aeb8c1;
+      border-radius: 5px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    button {
+      padding: 0 12px;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: #263d50;
+      border-color: #263d50;
+      color: #fff;
+    }
+
+    input {
+      width: 210px;
+      padding: 0 10px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      min-height: calc(100vh - 82px);
+    }
+
+    .viewport {
+      overflow: auto;
+      background: #fbfcfd;
+    }
+
+    svg {
+      display: block;
+      width: 2200px;
+      height: 1240px;
+      background: #fbfcfd;
+    }
+
+    aside {
+      border-left: 1px solid #d5dce2;
+      background: #fff;
+      padding: 18px;
+      overflow: auto;
+    }
+
+    aside h2 {
+      margin: 0 0 9px;
+      font-family: "Times New Roman", serif;
+      font-size: 19px;
+      overflow-wrap: anywhere;
+    }
+
+    aside h3 {
+      margin: 18px 0 7px;
+      font-size: 13px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    aside p, aside li {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    aside ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .legend-row { display: flex; align-items: center; gap: 8px; }
+    .sample { width: 32px; border-top: 2px solid var(--proof); }
+    .sample.statement { border-top-style: dashed; border-color: var(--statement); }
+    .sample.both { border-color: var(--both); }
+
+    .cluster-label {
+      fill: #26323d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .node rect {
+      stroke-width: 1.5;
+      rx: 5;
+      ry: 5;
+      cursor: pointer;
+      transition: opacity 120ms ease, stroke-width 120ms ease;
+    }
+
+    .node text {
+      pointer-events: none;
+      fill: #17212b;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      text-anchor: middle;
+    }
+
+    .node.theorem rect { stroke-width: 2.2; }
+    .node.dim { opacity: 0.16; }
+    .node.focus rect { stroke: #111 !important; stroke-width: 3.5; }
+
+    .edge {
+      fill: none;
+      stroke-width: 1.6;
+      opacity: 0.19;
+      transition: opacity 120ms ease, stroke-width 120ms ease;
+    }
+
+    .edge.proof { stroke: var(--proof); }
+    .edge.statement { stroke: var(--statement); stroke-dasharray: 6 5; }
+    .edge.both { stroke: var(--both); }
+    .edge.dim { opacity: 0.025; }
+    .edge.focus { opacity: 0.94; stroke-width: 3; }
+
+    .status {
+      margin-top: 14px;
+      padding: 9px 10px;
+      border: 1px solid #c8d0d7;
+      border-radius: 5px;
+      background: var(--panel);
+      color: #34414d;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .workspace { grid-template-columns: 1fr; }
+      aside { border-left: 0; border-top: 1px solid #d5dce2; }
+    }
+
+    @media print {
+      header { min-height: 70px; padding: 10px 18px; }
+      .controls, aside { display: none; }
+      .workspace { display: block; min-height: 0; }
+      .viewport { overflow: hidden; }
+      svg { width: 100%; height: auto; }
+    }
+
+    body.print-mode header { min-height: 78px; padding: 12px 20px; }
+    body.print-mode .controls, body.print-mode aside { display: none; }
+    body.print-mode .workspace { display: block; min-height: 0; }
+    body.print-mode .viewport { overflow: hidden; }
+    body.print-mode svg { width: 2200px; height: 1240px; }
+    body.print-mode .edge { opacity: 0.3; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Lean dependency architecture of the rate-distortion formalization</h1>
+      <div class="subtitle">
+        Kernel-level declaration references, compressed through hidden helper lemmas and transitively reduced.
+      </div>
+    </div>
+    <div class="controls" aria-label="Graph controls">
+      <button id="overviewButton" class="active" type="button">Core graph</button>
+      <button id="allButton" type="button">All selected declarations</button>
+      <button id="statementButton" class="active" type="button">Statement edges</button>
+      <input id="search" type="search" placeholder="Find a declaration" aria-label="Find a declaration">
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="viewport" aria-label="Dependency graph viewport">
+      <svg id="graph" viewBox="0 0 2200 1240" role="img" aria-labelledby="graphTitle graphDescription">
+        <title id="graphTitle">Rate-distortion Lean declaration dependency graph</title>
+        <desc id="graphDescription">Arrows point from a required declaration to a declaration that uses it.</desc>
+      </svg>
+    </section>
+    <aside id="details">
+      <h2>How to read the graph</h2>
+      <p>Arrows point from a prerequisite to a declaration that uses it. Click a node to isolate its ancestors and descendants.</p>
+      <div class="legend">
+        <div class="legend-row"><span class="sample"></span><span>proof or definition-body dependency</span></div>
+        <div class="legend-row"><span class="sample statement"></span><span>statement/type dependency</span></div>
+        <div class="legend-row"><span class="sample both"></span><span>both kinds</span></div>
+      </div>
+      <div class="status" id="status">Loading graph data...</div>
+    </aside>
+  </main>
+
+  <script src="rate_distortion_dependency_data.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      if (new URLSearchParams(window.location.search).has("print")) {
+        document.body.classList.add("print-mode");
+      }
+
+      const graph = window.RATE_DISTORTION_GRAPH;
+      const svg = document.getElementById("graph");
+      const details = document.getElementById("details");
+      const status = document.getElementById("status");
+      const search = document.getElementById("search");
+      const overviewButton = document.getElementById("overviewButton");
+      const allButton = document.getElementById("allButton");
+      const statementButton = document.getElementById("statementButton");
+      const ns = "http://www.w3.org/2000/svg";
+
+      if (!graph) {
+        status.textContent = "Graph data is missing. Run GenerateDependencyArtifacts.ps1 first.";
+        return;
+      }
+
+      const colors = [
+        ["#eaf1f6", "#4c718d"],
+        ["#f3ece3", "#8a6742"],
+        ["#eaf3e9", "#4c7650"],
+        ["#f4eaf0", "#875774"],
+        ["#edf0f5", "#586b83"],
+        ["#f3eeee", "#815b5b"]
+      ];
+
+      const finalIds = new Set([
+        "rate_distortion_achievability",
+        "rate_distortion_converse",
+        "rate_distortion_nonachievability"
+      ]);
+
+      const stageOf = node => {
+        if (node.groupIndex <= 2) return node.groupIndex;
+        if (node.groupIndex === 3 || node.groupIndex === 4) return 3;
+        return finalIds.has(node.id) ? 5 : 4;
+      };
+
+      const clusterOf = node => finalIds.has(node.id) ? "Final theorems" : node.group;
+      const clusterOrder = [
+        "Finite probability and coding",
+        "Entropy and mutual information",
+        "Single-letter rate-distortion",
+        "Direct part: memoryless random coding",
+        "Converse: single-letterization",
+        "Asymptotics and final theorem",
+        "Final theorems"
+      ];
+
+      const positions = new Map();
+      const nodeWidth = 286;
+      const nodeHeight = 54;
+      const columnX = [36, 390, 744, 1098, 1452, 1806];
+
+      function layout(nodes) {
+        positions.clear();
+        const clusters = new Map();
+        for (const node of nodes) {
+          const key = clusterOf(node);
+          if (!clusters.has(key)) clusters.set(key, []);
+          clusters.get(key).push(node);
+        }
+
+        for (const [cluster, members] of clusters) {
+          const stage = stageOf(members[0]);
+          let top = 74;
+          let bottom = 1168;
+          if (cluster.startsWith("Direct")) bottom = 560;
+          if (cluster.startsWith("Converse")) top = 680;
+          if (cluster === "Final theorems") { top = 330; bottom = 820; }
+          const available = Math.max(1, bottom - top - nodeHeight);
+          const step = members.length === 1 ? 0 : available / (members.length - 1);
+          members.forEach((node, index) => {
+            const y = members.length === 1 ? (top + bottom - nodeHeight) / 2 : top + index * step;
+            positions.set(node.id, { x: columnX[stage], y, node });
+          });
+        }
+      }
+
+      function svgElement(name, attributes = {}) {
+        const element = document.createElementNS(ns, name);
+        for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+        return element;
+      }
+
+      function splitLabel(label) {
+        const parts = label.split("_");
+        const lines = [];
+        let current = "";
+        for (const part of parts) {
+          const candidate = current ? `${current}_${part}` : part;
+          if (candidate.length > 31 && current) {
+            lines.push(current);
+            current = part;
+          } else {
+            current = candidate;
+          }
+        }
+        if (current) lines.push(current);
+        return lines.slice(0, 3);
+      }
+
+      function connectedIds(root, edges) {
+        const result = new Set([root]);
+        const downstream = [root];
+        while (downstream.length) {
+          const current = downstream.shift();
+          for (const edge of edges) {
+            if (edge.source === current && !result.has(edge.target)) {
+              result.add(edge.target);
+              downstream.push(edge.target);
+            }
+          }
+        }
+        const upstream = [root];
+        while (upstream.length) {
+          const current = upstream.shift();
+          for (const edge of edges) {
+            if (edge.target === current && !result.has(edge.source)) {
+              result.add(edge.source);
+              upstream.push(edge.source);
+            }
+          }
+        }
+        return result;
+      }
+
+      let mode = "overview";
+      let showStatements = true;
+      let selected = null;
+
+      function render() {
+        const nodes = graph.nodes.filter(node => mode === "all" || node.overview);
+        const nodeIds = new Set(nodes.map(node => node.id));
+        const edges = graph.edges.filter(edge =>
+          nodeIds.has(edge.source) && nodeIds.has(edge.target) &&
+          (showStatements || edge.kind !== "statement")
+        );
+        layout(nodes);
+        svg.replaceChildren();
+
+        const defs = svgElement("defs");
+        for (const [kind, color] of [["proof", "#315b7d"], ["statement", "#818b94"], ["both", "#76538c"]]) {
+          const marker = svgElement("marker", {
+            id: `arrow-${kind}`, markerWidth: 8, markerHeight: 8,
+            refX: 7, refY: 4, orient: "auto", markerUnits: "strokeWidth"
+          });
+          marker.appendChild(svgElement("path", { d: "M 0 0 L 8 4 L 0 8 z", fill: color }));
+          defs.appendChild(marker);
+        }
+        svg.appendChild(defs);
+
+        const visibleClusters = clusterOrder.filter(cluster => nodes.some(node => clusterOf(node) === cluster));
+        for (const cluster of visibleClusters) {
+          const members = nodes.map(node => positions.get(node.id)).filter(pos => clusterOf(pos.node) === cluster);
+          const minX = Math.min(...members.map(pos => pos.x)) - 14;
+          const minY = Math.min(...members.map(pos => pos.y)) - 36;
+          const maxY = Math.max(...members.map(pos => pos.y + nodeHeight)) + 14;
+          const groupIndex = members[0].node.groupIndex;
+          const [fill, stroke] = colors[groupIndex];
+          svg.appendChild(svgElement("rect", {
+            x: minX, y: minY, width: nodeWidth + 28, height: maxY - minY,
+            rx: 7, fill, "fill-opacity": 0.48, stroke, "stroke-opacity": 0.45
+          }));
+          const label = svgElement("text", { x: minX + 10, y: minY + 21, class: "cluster-label" });
+          label.textContent = cluster;
+          svg.appendChild(label);
+        }
+
+        const edgeLayer = svgElement("g", { id: "edges" });
+        for (const edge of edges) {
+          const source = positions.get(edge.source);
+          const target = positions.get(edge.target);
+          if (!source || !target) continue;
+          const sx = source.x + nodeWidth;
+          const sy = source.y + nodeHeight / 2;
+          const tx = target.x;
+          const ty = target.y + nodeHeight / 2;
+          let path;
+          if (tx > sx) {
+            const bend = Math.max(45, (tx - sx) * 0.48);
+            path = `M ${sx} ${sy} C ${sx + bend} ${sy}, ${tx - bend} ${ty}, ${tx} ${ty}`;
+          } else {
+            const offset = 24 + Math.abs(sy - ty) * 0.08;
+            path = `M ${sx - nodeWidth / 2} ${sy} C ${sx - nodeWidth / 2 + offset} ${sy}, ${tx + nodeWidth / 2 + offset} ${ty}, ${tx + nodeWidth / 2} ${ty}`;
+          }
+          const element = svgElement("path", {
+            d: path, class: `edge ${edge.kind}`,
+            "marker-end": `url(#arrow-${edge.kind})`,
+            "data-source": edge.source, "data-target": edge.target
+          });
+          edgeLayer.appendChild(element);
+        }
+        svg.appendChild(edgeLayer);
+
+        const nodeLayer = svgElement("g", { id: "nodes" });
+        for (const node of nodes) {
+          const pos = positions.get(node.id);
+          const [fill, stroke] = colors[node.groupIndex];
+          const group = svgElement("g", {
+            class: `node ${node.kind === "theorem" ? "theorem" : "definition"}`,
+            "data-id": node.id, tabindex: 0, role: "button"
+          });
+          group.appendChild(svgElement("rect", {
+            x: pos.x, y: pos.y, width: nodeWidth, height: nodeHeight,
+            fill: node.hasSorry ? "#fff2cc" : fill, stroke
+          }));
+          const lines = splitLabel(node.label);
+          const text = svgElement("text", { x: pos.x + nodeWidth / 2, y: pos.y + 19 });
+          lines.forEach((line, index) => {
+            const span = svgElement("tspan", {
+              x: pos.x + nodeWidth / 2,
+              dy: index === 0 ? 0 : 14
+            });
+            span.textContent = line;
+            text.appendChild(span);
+          });
+          group.appendChild(text);
+          group.addEventListener("click", () => selectNode(node.id, nodes, edges));
+          group.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") selectNode(node.id, nodes, edges);
+          });
+          nodeLayer.appendChild(group);
+        }
+        svg.appendChild(nodeLayer);
+
+        if (selected && nodeIds.has(selected)) selectNode(selected, nodes, edges);
+        else clearSelection(nodes, edges);
+
+        status.textContent = `${nodes.length} visible declarations; ${edges.length} visible reduced edges. ` +
+          `Full extraction: ${graph.nodes.length} declarations, ${graph.rawEdgeCount} unique pairs reduced to ${graph.reducedEdgeCount}.`;
+      }
+
+      function clearSelection(nodes) {
+        selected = null;
+        svg.querySelectorAll(".node, .edge").forEach(element => element.classList.remove("dim", "focus"));
+        const old = details.querySelector(".selection");
+        if (old) old.remove();
+      }
+
+      function selectNode(id, nodes, edges) {
+        selected = id;
+        const connected = connectedIds(id, edges);
+        svg.querySelectorAll(".node").forEach(element => {
+          const active = connected.has(element.dataset.id);
+          element.classList.toggle("dim", !active);
+          element.classList.toggle("focus", element.dataset.id === id);
+        });
+        svg.querySelectorAll(".edge").forEach(element => {
+          const active = connected.has(element.dataset.source) && connected.has(element.dataset.target);
+          element.classList.toggle("dim", !active);
+          element.classList.toggle("focus", active);
+        });
+
+        const node = nodes.find(candidate => candidate.id === id);
+        const upstream = edges.filter(edge => edge.target === id).map(edge => edge.source);
+        const downstream = edges.filter(edge => edge.source === id).map(edge => edge.target);
+        const old = details.querySelector(".selection");
+        if (old) old.remove();
+        const section = document.createElement("section");
+        section.className = "selection";
+        section.innerHTML = `
+          <h3>Selected declaration</h3>
+          <h2>${node.label}</h2>
+          <p><strong>Layer:</strong> ${node.group}<br><strong>Lean kind:</strong> ${node.kind}</p>
+          <h3>Direct displayed prerequisites</h3>
+          ${upstream.length ? `<ul>${upstream.map(name => `<li>${name}</li>`).join("")}</ul>` : "<p>None in the displayed selection.</p>"}
+          <h3>Direct displayed consumers</h3>
+          ${downstream.length ? `<ul>${downstream.map(name => `<li>${name}</li>`).join("")}</ul>` : "<p>None in the displayed selection.</p>"}`;
+        details.prepend(section);
+      }
+
+      overviewButton.addEventListener("click", () => {
+        mode = "overview"; selected = null;
+        overviewButton.classList.add("active"); allButton.classList.remove("active"); render();
+      });
+      allButton.addEventListener("click", () => {
+        mode = "all"; selected = null;
+        allButton.classList.add("active"); overviewButton.classList.remove("active"); render();
+      });
+      statementButton.addEventListener("click", () => {
+        showStatements = !showStatements;
+        statementButton.classList.toggle("active", showStatements); render();
+      });
+      search.addEventListener("input", () => {
+        const query = search.value.trim().toLowerCase();
+        svg.querySelectorAll(".node").forEach(element => {
+          element.classList.toggle("dim", query && !element.dataset.id.toLowerCase().includes(query));
+        });
+      });
+      svg.addEventListener("click", event => {
+        if (event.target === svg) clearSelection(graph.nodes);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Purpose and contribution}{2}{section.1}%
+\contentsline {section}{\numberline {2}Architecture at a glance}{2}{section.2}%
+\contentsline {section}{\numberline {3}Formal setting and representation choices}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Finite alphabets}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Distortion and boundedness}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Blocks and positive blocklengths}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Finite-PMF probability infrastructure}{5}{section.4}%
+\contentsline {section}{\numberline {5}Entropy, KL divergence, and mutual information}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Shannon and conditional entropy}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}KL-based and entropy-based mutual information}{6}{subsection.5.2}%
+\contentsline {section}{\numberline {6}The single-letter rate--distortion function}{7}{section.6}%
+\contentsline {section}{\numberline {7}Memoryless block infrastructure}{8}{section.7}%
+\contentsline {section}{\numberline {8}Information density and the direct coding theorem}{8}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Information density}{8}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Good pairs and random covering}{9}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Deterministic extraction and the finite-block direct theorem}{9}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Arbitrary codes and the finite-block converse}{10}{section.9}%
+\contentsline {section}{\numberline {10}Operational code sequences and diagonalization}{11}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Positive-blocklength code sequences}{11}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Why a diagonal construction is required}{11}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Main theorem API and exact scope}{12}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Strict achievability with a pointwise rate bound}{12}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Converse at every distortion threshold}{12}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Equality rate under an asymptotic rate constraint}{12}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Reusable infrastructure}{13}{section.12}%
+\contentsline {section}{\numberline {13}Mathlib reuse and type discipline}{14}{section.13}%
+\contentsline {section}{\numberline {14}Verification and reproducibility}{14}{section.14}%
+\contentsline {section}{\numberline {15}Current scope and extension path}{15}{section.15}%
+\contentsline {section}{\numberline {16}Conclusion}{16}{section.16}%

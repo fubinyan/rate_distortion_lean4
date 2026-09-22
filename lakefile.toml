@@ -1,0 +1,23 @@
+name = "rate_distortion_lean4"
+version = "0.1.0"
+defaultTargets = ["RateDistortion", "ApiCheck", "MainResults"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.28.0"
+
+[[lean_lib]]
+name = "RateDistortion"
+
+[[lean_lib]]
+name = "ApiCheck"
+
+[[lean_lib]]
+name = "MainResults"
